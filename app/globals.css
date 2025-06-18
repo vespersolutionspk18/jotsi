@@ -1,5 +1,118 @@
 @import "tailwindcss";
 
+/* OpenSauceOne Font Face Declarations */
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSauceOne';
+  src: url('/fonts/OpenSauceOne-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,7 +121,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-opensauce: 'OpenSauceOne', system-ui, sans-serif;
+  --font-sans: 'OpenSauceOne', system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -19,8 +133,88 @@
   }
 }
 
+/* OpenSauceOne Utility Classes */
+@layer utilities {
+  /* Light variants */
+  .font-light {
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .font-lightitalic {
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  /* Regular variants */
+  .font-regular {
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .font-italic {
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  /* Medium variants */
+  .font-medium {
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .font-mediumitalic {
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  /* SemiBold variants */
+  .font-semibold {
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .font-semibolditalic {
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  /* Bold variants */
+  .font-bold {
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .font-bolditalic {
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  /* ExtraBold variants */
+  .font-extrabold {
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .font-extrabolditalic {
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  /* Black variants */
+  .font-black {
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .font-blackitalic {
+    font-weight: 900;
+    font-style: italic;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'OpenSauceOne', system-ui, sans-serif;
 }

@@ -4,7 +4,7 @@ import { GoArrowUpRight } from "react-icons/go";
 import { useRouter } from 'next/navigation';
 
 interface ButtonProps {
-  variant?: 'default' | 'white';
+  variant?: 'default' | 'violet';
   text: string;
   route: string;
 }
@@ -17,14 +17,14 @@ const Button: React.FC<ButtonProps> = ({ variant = 'default', text, route }) => 
   };
 
   return (
-    <div className="flex flex-row group cursor-pointer" onClick={handleClick}>
-        <div className={`px-4 py-2 rounded-full font-medium tracking-tight ${
-          variant === 'default' ? 'bg-jyellow' : 'bg-white text-black'
+    <div className="flex flex-row items-center group cursor-pointer" onClick={handleClick}>
+        <div className={`px-4 py-2 rounded-full  tracking-tight ${
+          variant === 'default' ? 'bg-stone-200/75' : 'bg-black/85 text-white'
         }`}>
           {text}
         </div>
-        <div className={`rounded-full w-10 h-10 flex items-center justify-center ${
-          variant === 'default' ? 'bg-black' : 'bg-jyellow'
+        <div className={`rounded-full w-9 h-9 flex items-center justify-center ${
+          variant === 'default' ? 'bg-black' : 'bg-stone-200/75'
         }`}>
           <GoArrowUpRight className={`w-5 h-5 group-hover:rotate-45 transition-all duration-300 ease-in-out ${
             variant === 'default' ? 'fill-white' : 'fill-black'

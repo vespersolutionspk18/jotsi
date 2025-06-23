@@ -12,25 +12,25 @@ const Header = () => {
         <Image src="/assets/jotsi.svg" alt="" width={90} height={20}/>
       </div>
       <div className=" flex flex-row w-[40%] gap-2 ">
-        <div className="flex flex-row bg-stone-100 w-fit rounded-full py-1 px-1  items-center ">
+        <div className="flex flex-row bg-stone-100 hover:shadow-md hover:cursor-pointer hover:scale-[105%] transition-all 300 ease-in-out w-fit rounded-full py-1 px-1  items-center ">
           <div className=" bg-white flex items-center justify-center rounded-full w-8 h-8">
             <BiHomeAlt2 className="  w-5 h-5 " />
           </div>
           <p className="text-md  text-black px-3">Home</p>
         </div>
-        <div className="flex flex-row bg-stone-100 w-fit rounded-full py-1 px-1  items-center ">
-          <div className=" bg-white flex items-center justify-center rounded-full w-8 h-8">
+        <div className="flex flex-row bg-stone-100 hover:shadow-md hover:cursor-pointer hover:scale-[105%] transition-all 300 ease-in-out w-fit rounded-full py-1 px-1  items-center ">
+          <div className=" bg-white  flex items-center justify-center rounded-full w-8 h-8">
             <IoBusinessOutline className="  w-5 h-5 " />
           </div>
           <p className="text-md  text-black px-3">About</p>
         </div>
-        <div className="flex flex-row bg-stone-100 w-fit rounded-full py-1 px-1  items-center ">
+        <div className="flex flex-row bg-stone-100 hover:shadow-md hover:cursor-pointer hover:scale-[105%] transition-all 300 ease-in-out w-fit rounded-full py-1 px-1  items-center ">
           <div className=" bg-white flex items-center justify-center rounded-full w-8 h-8">
             <PiPackage className="  w-5 h-5 " />
           </div>
           <p className="text-md  text-black px-3">Services</p>
         </div>
-        <div className="flex flex-row bg-stone-100 w-fit rounded-full py-1 px-1  items-center ">
+        <div className="flex flex-row bg-stone-100 hover:shadow-md hover:cursor-pointer hover:scale-[105%] transition-all 300 ease-in-out w-fit rounded-full py-1 px-1  items-center ">
           <div className=" bg-white flex items-center justify-center rounded-full w-8 h-8">
             <IoFolderOpenOutline className="  w-5 h-5 " />
           </div>

@@ -3,11 +3,13 @@ import React, { useRef } from 'react';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Numbers = () => {
   const containerRef = useRef(null);
+  const sectionRef = useRef(null);
   const num1Ref = useRef(null);
   const num2Ref = useRef(null);
   const num3Ref = useRef(null);
@@ -15,23 +17,29 @@ const Numbers = () => {
   useGSAP(() => {
     const nums = [num1Ref.current, num2Ref.current, num3Ref.current];
     
+    // Subtle fade in and count animation
     nums.forEach((num, i) => {
       if (!num) return;
       
       gsap.fromTo(num, 
         { 
           innerText: 0,
+          opacity: 0,
+          y: 20,
         },
         {
           innerText: i === 0 ? 200 : i === 1 ? 50 : 98,
+          opacity: 1,
+          y: 0,
           duration: 2,
-          ease: "power2.out",
+          ease: "power3.out",
           snap: { innerText: 1 },
           scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
+            trigger: sectionRef.current,
+            start: "top 70%",
             toggleActions: "play none none reverse"
           },
+          delay: i * 0.1,
           onUpdate: function() {
             const val = Math.round(this.targets()[0].innerText);
             this.targets()[0].innerText = val + (i === 2 ? "%" : "+");
@@ -42,35 +50,65 @@ const Numbers = () => {
   }, { scope: containerRef });
 
   const stats = [
-    { number: "200+", label: "Happy Clients", ref: num1Ref },
-    { number: "50+", label: "Expert Professionals", ref: num2Ref },
-    { number: "98%", label: "Client Satisfaction", ref: num3Ref }
+    { 
+      number: "200+", 
+      label: "Happy Clients",
+      subtext: "and counting",
+      ref: num1Ref
+    },
+    { 
+      number: "50+", 
+      label: "Expert Professionals",
+      subtext: "at your service",
+      ref: num2Ref
+    },
+    { 
+      number: "98%", 
+      label: "Client Satisfaction",
+      subtext: "average rating",
+      ref: num3Ref
+    }
   ];
 
   return (
-    <div className="flex items-center justify-center p-6">
-      <div 
-        ref={containerRef}
-        className="rounded-[40px] flex flex-col md:flex-row p-8 items-center justify-center gap-8 md:gap-32 bg-black/5 backdrop-blur-md border border-white/20 shadow-2xl"
-      >
-        {stats.map((stat, index) => (
-          <div key={index} className="flex flex-col md:flex-row items-center gap-3 px-6 md:px-10 py-4">
-            <h5 
-              ref={stat.ref}
-              className="text-5xl font-medium bg-gradient-to-br from-violet-600 to-violet-800 bg-clip-text text-transparent"
-            >
-              {stat.number}
-            </h5>
-            <p className="text-gray-700 text-lg leading-5 text-center md:text-left">
-              {stat.label.split('\n').map((line, i) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i === 0 && <br />}
-                </React.Fragment>
-              ))}
-            </p>
+    <div className="overflow-hidden" ref={containerRef}>
+      <div ref={sectionRef} className="px-6 sm:px-8 lg:px-10 py-8 sm:py-10">
+        <div className="max-w-7xl mx-auto">
+          {/* Modern stat cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative"
+              >
+                <div className="text-center">
+                  {/* Large number */}
+                  <div className="mb-4">
+                    <span 
+                      ref={stat.ref}
+                      className="text-5xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-black inline-block"
+                    >
+                      {stat.number}
+                    </span>
+                  </div>
+                  
+                  {/* Label */}
+                  <h3 className="text-lg sm:text-xl font-medium text-black/90 mb-1">
+                    {stat.label}
+                  </h3>
+                  
+                  {/* Subtext */}
+                  <p className="text-sm text-black/60">
+                    {stat.subtext}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   )

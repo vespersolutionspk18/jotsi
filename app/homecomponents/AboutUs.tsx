@@ -30,6 +30,19 @@ const AboutUs = () => {
     // Check if mobile
     const isMobile = window.innerWidth < 768;
     
+    // CRITICAL FIX: Delay ScrollTrigger creation to next tick
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh(true);
+      
+      // Set container styles to prevent jump
+      if (!isMobile) {
+        gsap.set(container, {
+          transformStyle: "preserve-3d",
+          backfaceVisibility: "hidden",
+          perspective: 1000
+        });
+      }
+    
     // Set initial states with mobile adjustments
     gsap.set([m, l, r], { opacity: 0 });
     if (isMobile) {
@@ -43,17 +56,17 @@ const AboutUs = () => {
     }
 
     // Split text into spans for each letter while preserving line break
-    const lines = heading.innerHTML.split('<br>');
-    heading.innerHTML = lines
+    const lines = (heading as HTMLElement).innerHTML.split('<br>');
+    (heading as HTMLElement).innerHTML = lines
       .map((line, lineIndex) => {
-        const chars = line.split('').map((char, i) => 
+        const chars = line.split('').map((char) => 
           char === ' ' ? ' ' : `<span class="inline-block" style="transform-origin: center;">${char}</span>`
         ).join('');
         return lineIndex === 0 ? chars + '<br>' : chars;
       })
       .join('');
     
-    const letters = heading.querySelectorAll('span');
+    const letters = (heading as HTMLElement).querySelectorAll('span');
 
     // Create timeline with mobile adjustments
     const tl = gsap.timeline({
@@ -65,7 +78,13 @@ const AboutUs = () => {
         pin: !isMobile,
         pinSpacing: true,
         anticipatePin: 1, // Prevents jump at start
+        pinnedContainer: container, // Tell GSAP what element is being pinned
+        refreshPriority: 1, // Higher priority to calculate first
         markers: false, // Set to true for debugging
+        onRefresh: (self) => {
+          // Force proper calculation on refresh
+          self.refresh();
+        }
       }
     });
 
@@ -73,7 +92,7 @@ const AboutUs = () => {
     const letterDuration = 1.5 / letters.length; // Distribute across full animation
     letters.forEach((letter, i) => {
       tl.to(letter, {
-        color: "#7c3aed", // Tailwind violet-600
+        color: "#fffff", // Tailwind violet-600
         duration: letterDuration,
         ease: "none",
       }, i * letterDuration * 0.8); // Slight overlap for smooth transition
@@ -113,12 +132,14 @@ const AboutUs = () => {
     }, "-=0.3")
     // Add a pause at the end to prevent jump
     .set({}, {}, "+=0.3");
+    
+    }); // End of requestAnimationFrame
 
   }, { scope: wrapperRef });
 
   return (
-    <div ref={wrapperRef} className="relative">
-      <div ref={containerRef} className="relative h-[800px] md:h-[600px] flex items-center">
+    <div ref={wrapperRef} className="relative overflow-visible">
+      <div ref={containerRef} className="relative h-[800px] md:h-[600px] flex items-center will-change-transform">
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 w-full p-4 md:p-12">
           <div className="w-full md:w-[55%] flex flex-col gap-4 md:gap-6">
             <h4 ref={headingRef} className="text-3xl md:text-6xl font-medium tracking-tighter text-center md:text-left">
